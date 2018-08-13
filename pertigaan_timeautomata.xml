@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+chan n1, n2 , n3, n4, n5, n6, n7, n8, n9, n10, n11, n12, n13, n14, n15, n16,n17, n18;</declaration>
+	<template>
+		<name x="5" y="5">C1</name>
+		<declaration>// Place local declarations here.
+clock tc1;</declaration>
+		<location id="id0" x="-527" y="8">
+			<name x="-544" y="25">C1_y</name>
+			<label kind="invariant" x="-553" y="51">tc1 &lt;= 3</label>
+		</location>
+		<location id="id1" x="-353" y="-182">
+			<name x="-363" y="-216">C1_g</name>
+			<label kind="invariant" x="-363" y="-165">tc1 &lt;=  8</label>
+		</location>
+		<location id="id2" x="-540" y="-173">
+			<name x="-557" y="-216">C1_ry</name>
+			<label kind="invariant" x="-557" y="-156">tc1 &lt;= 1</label>
+		</location>
+		<location id="id3" x="-731" y="-170">
+			<name x="-741" y="-204">C1_r</name>
+			<label kind="invariant" x="-765" y="-153">tc1 &lt;= 48</label>
+		</location>
+		<init ref="id1"/>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-676" y="-63">tc1 &gt;= 3</label>
+			<label kind="synchronisation" x="-709" y="-99">n4?</label>
+			<label kind="assignment" x="-667" y="-37">tc1 := 0</label>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-446" y="-71">tc1 &gt;= 8</label>
+			<label kind="synchronisation" x="-416" y="-102">n1?</label>
+			<label kind="assignment" x="-446" y="-46">tc1 := 0</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-472" y="-199">tc1 &gt;= 1</label>
+			<label kind="synchronisation" x="-522" y="-194">n18?</label>
+			<label kind="assignment" x="-472" y="-173">tc1 := 0</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-688" y="-204">tc1 &gt;= 48</label>
+			<label kind="synchronisation" x="-709" y="-190">n17?</label>
+			<label kind="assignment" x="-684" y="-173">tc1 := 0</label>
+		</transition>
+	</template>
+	<template>
+		<name>C2</name>
+		<declaration>clock tc2;</declaration>
+		<location id="id4" x="-238" y="25">
+			<name x="-255" y="42">C2_y</name>
+			<label kind="invariant" x="-263" y="59">tc2 &lt;= 3</label>
+		</location>
+		<location id="id5" x="-42" y="-161">
+			<name x="-52" y="-195">C2_g</name>
+			<label kind="invariant" x="-52" y="-144">tc2 &lt;=  8</label>
+		</location>
+		<location id="id6" x="-246" y="-161">
+			<name x="-288" y="-195">C2_ry</name>
+			<label kind="invariant" x="-272" y="-153">tc2 &lt;= 1</label>
+		</location>
+		<location id="id7" x="-433" y="-161">
+			<name x="-443" y="-195">C2_r</name>
+			<label kind="invariant" x="-467" y="-144">tc2 &lt;= 48</label>
+		</location>
+		<init ref="id7"/>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id7"/>
+			<label kind="guard" x="-399" y="-68">tc2 &gt;= 3</label>
+			<label kind="synchronisation" x="-415" y="-85">n10?</label>
+			<label kind="assignment" x="-399" y="-51">tc2 := 0</label>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id4"/>
+			<label kind="guard" x="-127" y="-42">tc2 &gt;= 8</label>
+			<label kind="synchronisation" x="-110" y="-76">n7?</label>
+			<label kind="assignment" x="-127" y="-25">tc2 := 0</label>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id5"/>
+			<label kind="guard" x="-178" y="-187">tc2 &gt;= 1</label>
+			<label kind="synchronisation" x="-228" y="-178">n6?</label>
+			<label kind="assignment" x="-178" y="-161">tc2 := 0</label>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-382" y="-187">tc2 &gt;= 19</label>
+			<label kind="synchronisation" x="-415" y="-178">n5?</label>
+			<label kind="assignment" x="-374" y="-161">tc2 := 0</label>
+		</transition>
+	</template>
+	<template>
+		<name>C3</name>
+		<declaration>clock tc3;</declaration>
+		<location id="id8" x="-65" y="64">
+			<name x="-82" y="81">C3_y</name>
+			<label kind="invariant" x="-93" y="93">tc3 &lt;= 3</label>
+		</location>
+		<location id="id9" x="131" y="-122">
+			<name x="121" y="-156">C3_g</name>
+			<label kind="invariant" x="121" y="-105">tc3 &lt;=  8</label>
+		</location>
+		<location id="id10" x="-73" y="-122">
+			<name x="-115" y="-156">C3_ry</name>
+			<label kind="invariant" x="-99" y="-114">tc3 &lt;= 1</label>
+		</location>
+		<location id="id11" x="-260" y="-122">
+			<name x="-272" y="-161">C3_r</name>
+			<label kind="invariant" x="-289" y="-102">tc3 &lt;= 48</label>
+		</location>
+		<init ref="id11"/>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id11"/>
+			<label kind="guard" x="-226" y="-29">tc3 &gt;= 3</label>
+			<label kind="synchronisation" x="-242" y="-46">n16?</label>
+			<label kind="assignment" x="-226" y="-12">tc3 := 0</label>
+		</transition>
+		<transition>
+			<source ref="id9"/>
+			<target ref="id8"/>
+			<label kind="guard" x="46" y="-3">tc3 &gt;= 8</label>
+			<label kind="synchronisation" x="-47" y="-46">n13?</label>
+			<label kind="assignment" x="46" y="14">tc3 := 0</label>
+		</transition>
+		<transition>
+			<source ref="id10"/>
+			<target ref="id9"/>
+			<label kind="guard" x="-5" y="-148">tc3 &gt;= 1</label>
+			<label kind="synchronisation" x="-55" y="-139">n12?</label>
+			<label kind="assignment" x="-5" y="-122">tc3 := 0</label>
+		</transition>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id10"/>
+			<label kind="guard" x="-209" y="-148">tc3 &gt;= 39</label>
+			<label kind="synchronisation" x="-242" y="-139">n11?</label>
+			<label kind="assignment" x="-201" y="-122">tc3 := 0</label>
+		</transition>
+	</template>
+	<template>
+		<name>B1r</name>
+		<declaration>clock tb1r;</declaration>
+		<location id="id12" x="-561" y="73">
+			<name x="-578" y="90">B1r_y</name>
+			<label kind="invariant" x="-587" y="116">tb1r &lt;= 1</label>
+		</location>
+		<location id="id13" x="-383" y="-122">
+			<name x="-393" y="-156">B1r_g</name>
+			<label kind="invariant" x="-391" y="-102">tb1r &lt;=  29</label>
+		</location>
+		<location id="id14" x="-570" y="-113">
+			<name x="-587" y="-156">B1r_ry</name>
+			<label kind="invariant" x="-586" y="-102">tb1r &lt;= 1</label>
+		</location>
+		<location id="id15" x="-761" y="-110">
+			<name x="-782" y="-150">B1r_r</name>
+			<label kind="invariant" x="-795" y="-93">tb1r &lt;= 29</label>
+		</location>
+		<init ref="id13"/>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id15"/>
+			<label kind="guard" x="-706" y="-3">tb1r &gt;= 1</label>
+			<label kind="synchronisation" x="-731" y="-34">n6!</label>
+			<label kind="assignment" x="-697" y="23">tb1r := 0</label>
+		</transition>
+		<transition>
+			<source ref="id13"/>
+			<target ref="id12"/>
+			<label kind="guard" x="-476" y="-11">tb1r &gt;= 19</label>
+			<label kind="synchronisation" x="-442" y="-42">n5!</label>
+			<label kind="assignment" x="-476" y="14">tb1r := 0</label>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id13"/>
+			<label kind="guard" x="-502" y="-139">tb1r &gt;= 1</label>
+			<label kind="synchronisation" x="-552" y="-134">n15?</label>
+			<label kind="assignment" x="-502" y="-113">tb1r := 0</label>
+		</transition>
+		<transition>
+			<source ref="id15"/>
+			<target ref="id14"/>
+			<label kind="guard" x="-723" y="-139">tb1r &gt;= 29</label>
+			<label kind="synchronisation" x="-743" y="-128">n14?</label>
+			<label kind="assignment" x="-714" y="-113">tb1r := 0</label>
+		</transition>
+	</template>
+	<template>
+		<name>B1s</name>
+		<declaration>clock tb1s;</declaration>
+		<location id="id16" x="-340" y="47">
+			<name x="-357" y="64">B1s_y</name>
+			<label kind="invariant" x="-366" y="90">tb1s &lt;= 3</label>
+		</location>
+		<location id="id17" x="-162" y="-148">
+			<name x="-172" y="-182">B1s_g</name>
+			<label kind="invariant" x="-172" y="-131">tb1s &lt;=  18</label>
+		</location>
+		<location id="id18" x="-349" y="-139">
+			<name x="-366" y="-182">B1s_ry</name>
+			<label kind="invariant" x="-366" y="-122">tb1s &lt;= 1</label>
+		</location>
+		<location id="id19" x="-540" y="-136">
+			<name x="-578" y="-178">B1s_r</name>
+			<label kind="invariant" x="-569" y="-119">tb1s &lt;= 38</label>
+		</location>
+		<init ref="id19"/>
+		<transition>
+			<source ref="id16"/>
+			<target ref="id19"/>
+			<label kind="guard" x="-484" y="-34">tb1s &gt;= 3</label>
+			<label kind="synchronisation" x="-522" y="-61">n10!</label>
+			<label kind="assignment" x="-476" y="-3">tb1s := 0</label>
+		</transition>
+		<transition>
+			<source ref="id17"/>
+			<target ref="id16"/>
+			<label kind="guard" x="-255" y="-37">tb1s &gt;= 18</label>
+			<label kind="synchronisation" x="-322" y="-67">n7!</label>
+			<label kind="assignment" x="-255" y="-12">tb1s := 0</label>
+		</transition>
+		<transition>
+			<source ref="id18"/>
+			<target ref="id17"/>
+			<label kind="guard" x="-281" y="-165">tb1s &gt;= 1</label>
+			<label kind="synchronisation" x="-331" y="-160">n3?</label>
+			<label kind="assignment" x="-281" y="-139">tb1s := 0</label>
+		</transition>
+		<transition>
+			<source ref="id19"/>
+			<target ref="id18"/>
+			<label kind="guard" x="-502" y="-165">tb1s &gt;= 9</label>
+			<label kind="synchronisation" x="-522" y="-154">n2?</label>
+			<label kind="assignment" x="-493" y="-139">tb1s := 0</label>
+		</transition>
+	</template>
+	<template>
+		<name>B2s</name>
+		<declaration>clock tb2s;</declaration>
+		<location id="id20" x="-340" y="47">
+			<name x="-357" y="64">B2s_y</name>
+			<label kind="invariant" x="-366" y="90">tb2s &lt;= 1</label>
+		</location>
+		<location id="id21" x="-162" y="-148">
+			<name x="-172" y="-182">B2s_g</name>
+			<label kind="invariant" x="-170" y="-136">tb2s &lt;=  29</label>
+		</location>
+		<location id="id22" x="-348" y="-136">
+			<name x="-365" y="-179">B2s_ry</name>
+			<label kind="invariant" x="-365" y="-119">tb2s &lt;= 1</label>
+		</location>
+		<location id="id23" x="-540" y="-136">
+			<name x="-561" y="-176">B2s_r</name>
+			<label kind="invariant" x="-574" y="-119">tb2s &lt;= 29</label>
+		</location>
+		<init ref="id23"/>
+		<transition>
+			<source ref="id20"/>
+			<target ref="id23"/>
+			<label kind="guard" x="-485" y="-29">tb2s &gt;= 1</label>
+			<label kind="synchronisation" x="-522" y="-61">n12!</label>
+			<label kind="assignment" x="-476" y="-3">tb2s := 0</label>
+		</transition>
+		<transition>
+			<source ref="id21"/>
+			<target ref="id20"/>
+			<label kind="guard" x="-255" y="-37">tb2s &gt;= 29</label>
+			<label kind="synchronisation" x="-322" y="-67">n11!</label>
+			<label kind="assignment" x="-255" y="-12">tb2s := 0</label>
+		</transition>
+		<transition>
+			<source ref="id22"/>
+			<target ref="id21"/>
+			<label kind="guard" x="-281" y="-165">tb2s &gt;= 1</label>
+			<label kind="synchronisation" x="-330" y="-159">n3!</label>
+			<label kind="assignment" x="-281" y="-139">tb2s := 0</label>
+		</transition>
+		<transition>
+			<source ref="id23"/>
+			<target ref="id22"/>
+			<label kind="guard" x="-502" y="-165">tb2s &gt;= 9</label>
+			<label kind="synchronisation" x="-522" y="-153">n2!</label>
+			<label kind="assignment" x="-493" y="-139">tb2s := 0</label>
+		</transition>
+	</template>
+	<template>
+		<name>B2l</name>
+		<declaration>clock tb2l;</declaration>
+		<location id="id24" x="-1029" y="-131">
+			<name x="-1046" y="-114">B2l_y</name>
+			<label kind="invariant" x="-1055" y="-88">tb2l &lt;= 3</label>
+		</location>
+		<location id="id25" x="-850" y="-323">
+			<name x="-860" y="-357">B2l_g</name>
+			<label kind="invariant" x="-858" y="-311">tb2l &lt;=  18</label>
+		</location>
+		<location id="id26" x="-1037" y="-314">
+			<name x="-1054" y="-357">B2l_ry</name>
+			<label kind="invariant" x="-1054" y="-297">tb2l &lt;= 1</label>
+		</location>
+		<location id="id27" x="-1229" y="-314">
+			<name x="-1249" y="-357">B2l_r</name>
+			<label kind="invariant" x="-1258" y="-297">tb2l &lt;= 38</label>
+		</location>
+		<init ref="id27"/>
+		<transition>
+			<source ref="id24"/>
+			<target ref="id27"/>
+			<label kind="guard" x="-1174" y="-207">tb2l &gt;= 3</label>
+			<label kind="synchronisation" x="-1211" y="-239">n16!</label>
+			<label kind="assignment" x="-1165" y="-181">tb2l := 0</label>
+		</transition>
+		<transition>
+			<source ref="id25"/>
+			<target ref="id24"/>
+			<label kind="guard" x="-944" y="-215">tb2l &gt;= 18</label>
+			<label kind="synchronisation" x="-1011" y="-244">n13!</label>
+			<label kind="assignment" x="-944" y="-190">tb2l := 0</label>
+		</transition>
+		<transition>
+			<source ref="id26"/>
+			<target ref="id25"/>
+			<label kind="guard" x="-970" y="-343">tb2l &gt;= 1</label>
+			<label kind="synchronisation" x="-1019" y="-335">n9?</label>
+			<label kind="assignment" x="-970" y="-317">tb2l := 0</label>
+		</transition>
+		<transition>
+			<source ref="id27"/>
+			<target ref="id26"/>
+			<label kind="guard" x="-1190" y="-340">tb2l &gt;= 29</label>
+			<label kind="synchronisation" x="-1211" y="-331">n8?</label>
+			<label kind="assignment" x="-1182" y="-317">tb2l := 0</label>
+		</transition>
+	</template>
+	<template>
+		<name>B3r</name>
+		<declaration>clock tb3r;</declaration>
+		<location id="id28" x="-272" y="5">
+			<name x="-289" y="22">B3r_y</name>
+			<label kind="invariant" x="-298" y="48">tb3r &lt;= 1</label>
+		</location>
+		<location id="id29" x="-94" y="-190">
+			<name x="-104" y="-224">B3r_g</name>
+			<label kind="invariant" x="-104" y="-173">tb3r &lt;=  29</label>
+		</location>
+		<location id="id30" x="-281" y="-181">
+			<name x="-298" y="-224">B3r_ry</name>
+			<label kind="invariant" x="-298" y="-164">tb3r &lt;= 1</label>
+		</location>
+		<location id="id31" x="-476" y="-178">
+			<name x="-497" y="-218">B3r_r</name>
+			<label kind="invariant" x="-510" y="-161">tb3r &lt;= 29</label>
+		</location>
+		<init ref="id31"/>
+		<transition>
+			<source ref="id28"/>
+			<target ref="id31"/>
+			<label kind="guard" x="-417" y="-71">tb3r &gt;= 1</label>
+			<label kind="synchronisation" x="-459" y="-102">n18!</label>
+			<label kind="assignment" x="-408" y="-45">tb3r := 0</label>
+		</transition>
+		<transition>
+			<source ref="id29"/>
+			<target ref="id28"/>
+			<label kind="guard" x="-187" y="-79">tb3r &gt;= 29</label>
+			<label kind="synchronisation" x="-254" y="-109">n17!</label>
+			<label kind="assignment" x="-187" y="-54">tb3r := 0</label>
+		</transition>
+		<transition>
+			<source ref="id30"/>
+			<target ref="id29"/>
+			<label kind="guard" x="-213" y="-207">tb3r &gt;= 1</label>
+			<label kind="synchronisation" x="-263" y="-202">n9!</label>
+			<label kind="assignment" x="-213" y="-181">tb3r := 0</label>
+		</transition>
+		<transition>
+			<source ref="id31"/>
+			<target ref="id30"/>
+			<label kind="guard" x="-434" y="-207">tb3r &gt;= 29</label>
+			<label kind="synchronisation" x="-458" y="-196">n8!</label>
+			<label kind="assignment" x="-425" y="-181">tb3r := 0</label>
+		</transition>
+	</template>
+	<template>
+		<name>B3l</name>
+		<declaration>clock tb3l;</declaration>
+		<location id="id32" x="-753" y="-134">
+			<name x="-770" y="-117">B3l_y</name>
+			<label kind="invariant" x="-779" y="-91">tb3l &lt;= 3</label>
+		</location>
+		<location id="id33" x="-574" y="-326">
+			<name x="-584" y="-360">B3l_g</name>
+			<label kind="invariant" x="-582" y="-314">tb3l &lt;=  18</label>
+		</location>
+		<location id="id34" x="-761" y="-317">
+			<name x="-778" y="-360">B3l_ry</name>
+			<label kind="invariant" x="-778" y="-300">tb3l &lt;= 1</label>
+		</location>
+		<location id="id35" x="-953" y="-317">
+			<name x="-973" y="-360">B3l_r</name>
+			<label kind="invariant" x="-1003" y="-297">tb3l &lt;= 38</label>
+		</location>
+		<init ref="id33"/>
+		<transition>
+			<source ref="id32"/>
+			<target ref="id35"/>
+			<label kind="guard" x="-898" y="-210">tb3l &gt;= 3</label>
+			<label kind="synchronisation" x="-935" y="-242">n4!</label>
+			<label kind="assignment" x="-889" y="-184">tb3l := 0</label>
+		</transition>
+		<transition>
+			<source ref="id33"/>
+			<target ref="id32"/>
+			<label kind="guard" x="-668" y="-218">tb3l &gt;= 8</label>
+			<label kind="synchronisation" x="-637" y="-246">n1!</label>
+			<label kind="assignment" x="-668" y="-193">tb3l := 0</label>
+		</transition>
+		<transition>
+			<source ref="id34"/>
+			<target ref="id33"/>
+			<label kind="guard" x="-694" y="-346">tb3l &gt;= 1</label>
+			<label kind="synchronisation" x="-743" y="-338">n15!</label>
+			<label kind="assignment" x="-694" y="-320">tb3l := 0</label>
+		</transition>
+		<transition>
+			<source ref="id35"/>
+			<target ref="id34"/>
+			<label kind="guard" x="-918" y="-348">tb3l &gt;= 38</label>
+			<label kind="synchronisation" x="-935" y="-334">n14!</label>
+			<label kind="assignment" x="-906" y="-320">tb3l := 0</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+PC1 = C1();
+PC2 = C2();
+PC3 = C3();
+PB1r = B1r();
+PB1s = B1s();
+PB2s = B2s();
+PB2l = B2l();
+PB3r = B3r();
+PB3l = B3l();
+// List one or more processes to be composed into a system.
+system  PC1, PC2, PC3,PB1r, PB1s, PB2s,PB2l, PB3r,PB3l;
+
+    </system>
+	<queries>
+		<query>
+			<formula>A&lt;&gt;  not (PC1.C1_g &amp;&amp;  PC1.C1_r)
+			</formula>
+			<comment>S1 : Pada setiap lampu lalu lintas, lampu merah dan hijau tidak pernah menyala bersamaan.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt;  not (PC2.C2_g &amp;&amp;  PC2.C2_r)
+			</formula>
+			<comment>S1 : Pada setiap lampu lalu lintas, lampu merah dan hijau tidak pernah menyala bersamaan.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt;  not (PC3.C3_g &amp;&amp;  PC3.C3_r)
+			</formula>
+			<comment>S1 : Pada setiap lampu lalu lintas, lampu merah dan hijau tidak pernah menyala bersamaan.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt;  not (PB1r.B1r_g &amp;&amp;  PB1r.B1r_r)
+			</formula>
+			<comment>S1 : Pada setiap lampu lalu lintas, lampu merah dan hijau tidak pernah menyala bersamaan.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt;  not (PB1s.B1s_g &amp;&amp;  PB1s.B1s_r)
+			</formula>
+			<comment>S1 : Pada setiap lampu lalu lintas, lampu merah dan hijau tidak pernah menyala bersamaan.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt; not (PB2l.B2l_g &amp;&amp; not PB2l.B2l_r)
+			</formula>
+			<comment>S1 : Pada setiap lampu lalu lintas, lampu merah dan hijau tidak pernah menyala bersamaan.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt; not (PB2s.B2s_g &amp;&amp; not PB2s.B2s_r)
+			</formula>
+			<comment>S1 : Pada setiap lampu lalu lintas, lampu merah dan hijau tidak pernah menyala bersamaan.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt; not (PB3r.B3r_g &amp;&amp; not PB3r.B3r_r)
+			</formula>
+			<comment>S1 : Pada setiap lampu lalu lintas, lampu merah dan hijau tidak pernah menyala bersamaan.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt; not (PB3l.B3l_g &amp;&amp; not PB3l.B3l_r)
+			</formula>
+			<comment>S1 : Pada setiap lampu lalu lintas, lampu merah dan hijau tidak pernah menyala bersamaan.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt;  (PB3l.B3l_g &amp;&amp; not PB3l.B3l_y &amp;&amp; not PB3l.B3l_r)
+			</formula>
+			<comment>L1 Pada setiap set lampu, suatu saat lampu hijau adalah satu-satunya lampu yang menyala.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt;  (PB1r.B1r_g &amp;&amp; not PB1r.B1r_y &amp;&amp; not PB1r.B1r_r)
+			</formula>
+			<comment>L1 Pada setiap set lampu, suatu saat lampu hijau adalah satu-satunya lampu yang menyala.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt; (PC1.C1_g &amp;&amp; not PC1.C1_y &amp;&amp; not PC1.C1_r)
+			</formula>
+			<comment>L1 Pada setiap set lampu, suatu saat lampu hijau adalah satu-satunya lampu yang menyala.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt; (not ( PC2.C2_g &amp;&amp; PC3.C3_g)  &amp;&amp;  not ( PB2s.B2s_g &amp;&amp; PC3.C3_g)  &amp;&amp; not ( PB2l.B2l_g &amp;&amp; PB3l.B3l_g) 
+&amp;&amp; not ( PC2.C2_g &amp;&amp; PB3r.B3r_g) &amp;&amp; not ( PC2.C2_g &amp;&amp; PB3l.B3l_g))
+			</formula>
+			<comment>S5.3 : pada area 2 dan 3, lampu hijau C2&amp;C3, B2s &amp; C3, B2l &amp; B3l, C2 &amp; B3r, C2 &amp; B3l tidak
+boleh terjadi secara bersamaan.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt; (not ( PC1.C1_g &amp;&amp; PC3.C3_g)  &amp;&amp;  not ( PC1.C1_g &amp;&amp; PB3r.B3r_g)  &amp;&amp; not ( PB1s.B1s_g &amp;&amp; PC3.C3_g) 
+&amp;&amp; not ( PB1s.B1s_g &amp;&amp; PB3l.B3l_g) &amp;&amp; not ( PB1r.B1r_g &amp;&amp; PC3.C3_g))
+			</formula>
+			<comment>S5.2 : pada area 1 dan 3, lampu hijau C1 &amp; C3, C1 &amp; B3r, B1s &amp; C3, B1s &amp; B3l, dan B1r &amp; C3
+tidak boleh terjadi secara bersamaan.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt; (not ( PC1.C1_g &amp;&amp; PC2.C2_g)  &amp;&amp;  not ( PC1.C1_g &amp;&amp; PB2s.B2s_g)  &amp;&amp; not ( PC1.C1_g &amp;&amp; PB2l.B2l_g) 
+&amp;&amp; not ( PC2.C2_g &amp;&amp; PB1r.B1r_g) &amp;&amp; not ( PB1s.B1s_g &amp;&amp; PB2l.B2l_g))
+			</formula>
+			<comment>S5.1. : pada area 1 dan 2, lampu hijau C1 &amp; C2, C1 &amp; B2s, C1 &amp; B2l ,C2 &amp; B1r, dan B1s &amp; B2l
+tidak boleh terjadi secara bersamaan.
+			</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt; (not ( PC1.C1_g &amp;&amp; PB1s.B1s_g)  &amp;&amp;  not ( PC2.C2_g &amp;&amp; PB2l.B2l_g)  &amp;&amp; not ( PC3.C3_g &amp;&amp; PB3l.B3l_g))
+			</formula>
+			<comment>S.4 Berdasarkan observasi, pada area yang sama. Lampu yang tidak boleh menyala secara bersamaan
+			</comment>
+		</query>
+	</queries>
+</nta>
