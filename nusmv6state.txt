@@ -1,0 +1,220 @@
+--	LTL-model
+
+MODULE main
+
+VAR
+
+state	:	{s0, s1, s2, s3, s4, s5};
+
+ASSIGN
+
+init(state) := s0;
+
+next(state) :=
+
+case
+	state = s0 :	{s1};
+	state = s1 :	{s2};
+	state = s2 :	{s3};
+	state = s3 :	{s4};
+	state = s4 :	{s5};
+	state = s5 :	{s0};
+	
+
+esac;
+
+DEFINE
+
+-- C1	:	mengatur laju kendaraan pada jalur kendaraan pertama dari arah barat ke selatan.
+C1.g	:= state = s0;
+C1.y	:= state = s5 | state = s1;
+C1.r	:= state = s2 | state = s3 | state = s4 |state = s5 ;
+
+-- B1r	:	mengatur laju kendaraan pada jalur busway pertama dari arah barat ke selatan.			
+B1r.g	:=	state = s5 | state = s0 | state = s1;				
+B1r.y	:=	state = s4 | state = s2;	
+B1r.r	:=	state = s3 |state = s4;
+
+-- B1s	:	mengatur laju kendaraan pada jalur busway pertama dari arah barat ke timur.		
+B1s.g	:=	state = s1 | state = s2;
+B1s.y	:=	state = s0 | state = s3;	
+B1s.r	:=	state = s0 | state = s4 | state = s5;
+
+--------------------------------------------------------------------------
+-- C2	:	mengatur laju kendaraan pada jalur kendaraan kedua dari arah timur ke barat.
+C2.g	:= state = s2;
+C2.y	:= state = s1| state = s3;
+C2.r	:= state = s0| state = s1 | state = s4 | state = s5;
+
+-- B2s	:	mengatur laju kendaraan pada jalur busway kedua dari arah timur ke barat.	
+B2s.g	:=	state = s2| state = s3;
+B2s.y	:=	state = s1	| state = s4;
+B2s.r	:=	state = s0 | state = s1 | state= s5;
+
+-- B2l	:	mengatur laju kendaraan pada jalur busway kedua dari arah timur ke selatan.		
+B2l.g	:=	state = s3 | state = s4;
+B2l.y	:=	state = s2	| state = s5;
+B2l.r	:=	state = s0 | state = s1 | state = s2;
+
+--------------------------------------------------------------------------
+-- C3	:	mengatur laju kendaraan pada jalur kendaraan ketiga dari arah selatan ke timur.	
+C3.g	:= state = s4;
+C3.y	:= state = s3 | state = s5;
+C3.r	:= state= s0 | state = s1 | state = s2 | state = s3;
+
+-- B3r	:	mengatur laju kendaraan pada jalur busway ketiga dari arah selatan ke barat.
+B3r.g	:=	state = s3 | state = s4 | state = s5;				
+B3r.y	:=	state = s2 | state = s0 ;	
+B3r.r	:=	state = s1 |  state = s2;
+
+-- B3l	:	mengatur laju kendaraan pada jalur busway pertama dari arah selatan ke barat.
+B3l.g	:=	state = s5 | state= s0;
+B3l.y	:=	state = s4	| state = s1;
+B3l.r	:=	state = s2 | state = s3 | state = s4;
+
+--------------------------------------------------------------------------
+
+LTLSPEC -- S1 = pada setiap lampu, warna merah dan hijau tidak boleh terjadi secara bersama-sama.
+G ( ! ( C1.r & C1.g ) 
+ &  ! ( C2.r & C2.g ) 
+ &  ! ( C3.r & C3.g )  
+ &  ! ( B1r.r & B1r.g ) &  ! ( B1s.r & B1s.g )  
+ &  ! ( B2s.r & B2s.g ) &  ! ( B2l.r & B2l.g )
+ &  ! ( B3r.r & B3r.g ) &  ! ( B3l.r & B3l.g ))
+
+
+LTLSPEC -- S2 = pada setiap lampu, ketika lampu berwarna hijau adalah satu-satunya lampu yang menyala, maka lampu tidak boleh tiba-tiba menjadi warna merah.
+
+G  (( ! C1.r & !  C1.y &   C1.g -> X ! C1.r )
+&	( ! C2.r & !  C2.y &   C2.g -> X ! C2.r )
+&	( ! C3.r & !  C3.y &   C3.g -> X ! C3.r )
+&	( ! B1r.r & !  B1r.y &   B1r.g -> X ! B1r.r ) 
+&   ( ! B1s.r & !  B1s.y &   B1s.g -> X ! B1s.r )
+&	( ! B2s.r & !  B2s.y &   B2s.g -> X ! B2s.r )
+&	( ! B2l.r & !  B2l.y &   B2l.g -> X ! B2l.r )
+&   ( ! B3r.r & !  B3r.y &   B3r.g -> X ! B3r.r )
+&	( ! B3l.r & !  B3l.y &   B3l.g -> X ! B3l.r ))
+
+LTLSPEC --S4 pada area yang sama, kedua lampu tidak boleh terjadi secara bersamaan
+G   ( !(C1.g & B1s.g) & !(C2.g & B2l.g) & !(C3.g & B3l.g))
+
+LTLSPEC  --S5.1 pada area 1-2, lampu hijau C1-C2, C1-B2s, C1-B2l, 
+--C2-B1r, dan B1s-B2l tidak boleh terjadi secara bersamaan.
+G !((C1.g & C2.g) & (C1.g & B2s.g) & (C1.g & B2l.g) & (C2.g & B1r.g) 
+  & (B1s.g & B2l.g))
+
+LTLSPEC  --S5.2 : pada area 1 dan 3, lampu hijau C1-C3, C1-B3r, B1s-C3, 
+--B1s-B3l, dan B1r-C3 tidak boleh terjadi secara bersamaan.
+G !((C1.g & C3.g) & (C1.g & B3r.g) & (B1s.g & C3.g) & (B1s.g & B3l.g) 
+  & (B1r.g & C3.g))
+
+LTLSPEC  --S5.3 : pada area 2 dan 3, lampu hijau C2-C3, B2s-C3, B2l-B3l, 
+--C2-B3r, C2-B3l tidak boleh terjadi secara bersamaan.
+G !((C2.g & C3.g) & (B2s.g & C3.g) & (B2l.g & B3l.g) & (C2.g & B3r.g) 
+  & (C2.g & B3l.g))
+
+LTLSPEC -- F1 = pada setiap lampu, kondisi ketika lampu satu-satunya 
+--lampu yang menyala adalah lampu hijau dan terjadi secara berkala
+G F ( C1.g & ! C1.y & ! C1.r) &
+G F ( C2.g & ! C2.y & ! C2.r) & 
+G F ( C3.g & ! C3.y & ! C3.r) & 
+G F ( B1s.g & ! B1s.y & ! B1s.r) & G F ( B1r.g & ! B1r.y & ! B1r.r) & 
+G F ( B2s.g & ! B2s.y & ! B2s.r) & G F ( B2l.g & ! B2l.y & ! B2l.r ) &
+G F ( B3r.g & ! B3r.y & ! B3r.r) & G F ( B3l.g & ! B3l.y & ! B3l.r ) 
+
+LTLSPEC -- F2 = pada setiap lampu, jika lampu merah menyala secara berkala,
+--maka lampu hijau juga akan menyala secara berkala
+-- revisi
+(G F ( C1.r)  -> G F ( C1.g ) ) &  
+(G F ( C2.r)  -> G F ( C2.g ) ) & 
+(G F ( C3.r ) -> G F ( C3.g ) ) & 	
+(G F ( B1r.r) -> G F ( B1r.g ) ) & 
+(G F ( B1s.r) -> G F ( B1s.g ) ) & 
+(G F ( B2l.r) -> G F ( B2l.g ) ) &
+(G F ( B2l.r) -> G F ( B2s.g ) ) & 
+(G F ( B3r.r) -> G F ( B3r.g ) ) & 
+(G F ( B3l.r) -> G F ( B3l.g ) )
+
+ 
+ 
+LTLSPEC -- F3 = pada setiap lampu, jika lampu hijau menyala secara berkala, 
+--maka lampu merah |uga akan menyala secara berkala.
+--revisi
+(G F  (C1.g)  -> G F ( C1.r ) ) & 
+(G F  (C2.g)  -> G F ( C2.r ) ) &  
+(G F  (C3.g)  -> G F ( C3.r ) ) & 	
+(G F  (B1r.g) -> G F ( B1r.r ) ) & 
+(G F  (B1s.g) -> G F ( B1s.r ) ) &  
+(G F  (B2s.g) -> G F ( B2s.r ) ) & 
+(G F  (B2l.g) -> G F ( B2l.r ) ) & 
+(G F  (B3r.g) -> G F ( B3r.r ) ) & 
+(G F  (B3l.g) -> G F ( B3l.r ) )	
+
+
+LTLSPEC -- L1 = pada setiap lampu, suatu saat lampu hijau 
+--adalah satu-satunya lampu yang menyala.
+
+F ( C1.g & ! C1.y & ! C1.r ) &
+F ( C2.g & ! C2.y & ! C2.r ) & 
+F ( C3.g & ! C3.y & ! C3.r ) &
+F ( B1r.g & ! B1r.y & ! B1r.r ) & F ( B1s.g & ! B1s.y & ! B1s.r ) &
+F ( B2s.g & ! B2s.y & ! B2s.r ) & F ( B2l.g & ! B2l.y & ! B2l.r ) &
+F ( B3r.g & ! B3r.y & ! B3r.r ) & F ( B3l.g & ! B3l.y & ! B3l.r ) 
+
+
+LTLSPEC -- L2 = pada setiap lampu, ketika lampu berwarna merah, 
+--maka suatu saat lampu akan berwarna hijau.
+G ( ( C1.r -> F C1.g ) &  ( C2.r -> F C2.g ) & ( C3.r -> F C3.g )  
+&   ( B1r.r -> F B1r.g ) & ( B1s.r -> F B1s.g ) 
+&   ( B2s.r -> F B2s.g ) & ( B2l.r -> F B2l.g ) 
+&	( B3r.r -> F B3r.g ) & ( B3l.r -> F B3l.g ))
+
+LTLSPEC -- L3 = pada setiap lampu, ketika lampu berwarna hijau, 
+--maka suatu saat lampu akan berwarna merah.
+G ( ( C1.g -> F C1.r ) 
+& 	( C2.g -> F C2.r ) 
+& 	( C3.g -> F C3.r ) 
+&	( B1s.g -> F B1s.r ) & ( B1r.g -> F B1r.r ) 
+&   ( B2s.g -> F B2s.r ) & ( B2l.g -> F B2l.r ) 
+&	( B3r.g -> F B3r.r ) & ( B3l.g -> F B3l.r ))
+
+LTLSPEC -- L4 = pada setiap lampu, ketika lampu berwarna kuning, 
+--maka suatu saat lampu akan berwarna merah atau hi|au, tetapi tidak keduanya.
+G ( ( C1.y -> F ( C1.r xor C1.g ))  
+& 	( C2.y -> F ( C2.r xor C2.g )) 
+&	( C3.y -> F ( C3.r xor C3.g )) 
+&	( B1r.y -> F ( B1r.r xor B1r.g )) & ( B1s.y -> F ( B1s.r xor B1s.g ))  
+& 	( B2s.y -> F ( B2s.r xor B2s.g )) & ( B2l.y -> F ( B2l.r xor B2l.g ))
+&	( B3r.y -> F ( B3r.r xor B3r.g )) &	( B3l.y -> F ( B3l.r xor B3l.g )))
+
+LTLSPEC -- L5 = pada setiap lampu, apabila satu-satunya lampu yang menyala adalah warna merah, 
+--maka lampu merah adalah satu-satunya lampu yang menyala hingga lampu tersebut berwarna merah dan kuning.
+G ((( C1.r & !  C1.y & ! C1.g ) -> (( C1.r & !  C1.y & ! C1.g ) U ( C1.r & C1.y ))) &
+   (( C2.r & !  C2.y & ! C2.g ) -> (( C2.r & !  C2.y & ! C2.g ) U ( C2.r & C2.y ))) & 
+   (( C3.r & !  C3.y & ! C3.g ) -> (( C3.r & !  C3.y & ! C3.g ) U ( C3.r & C3.y ))) &
+   (( B1r.r & !  B1r.y & ! B1r.g ) -> (( B1r.r & !  B1r.y & ! B1r.g ) U ( B1r.r & B1r.y ))) &	
+   (( B1s.r & !  B1s.y & ! B1s.g ) -> (( B1s.r & !  B1s.y & ! B1s.g ) U ( B1s.r & B1s.y ))) &	
+   (( B2s.r & !  B2s.y & ! B2s.g ) -> (( B2s.r & !  B2s.y & ! B2s.g ) U ( B2s.r & B2s.y ))) &	
+   (( B2l.r & !  B2l.y & ! B2l.g ) -> (( B2l.r & !  B2l.y & ! B2l.g ) U ( B2l.r & B2l.y ))) &	
+   (( B3r.r & !  B3r.y & ! B3r.g ) -> (( B3r.r & !  B3r.y & ! B3r.g ) U ( B3r.r & B3r.y ))) &	
+   (( B3l.r & !  B3l.y & ! B3l.g ) -> (( B3l.r & !  B3l.y & ! B3l.g ) U ( B3l.r & B3l.y ))))
+	
+		
+LTLSPEC -- L6 = pada setiap lampu, apabila hanya lampu merah dan kuning yang menyala, 
+--maka lampu yang menyala hanya lampu merah dan kuning hingga lampu tersebut berwarna hijau
+G ( (( C1.r & C1.y & !  C1.g ) -> (( C1.r & C1.y & !   C1.g ) U ( C1.g )))
+&	(( C2.r & C2.y & !  C2.g ) -> (( C2.r & C2.y & !   C2.g ) U ( C2.g )))
+&	(( C3.r & C3.y & !  C3.g ) -> (( C3.r & C3.y & !   C3.g ) U ( C3.g )))
+&   (( B1r.r & B1r.y & !  B1r.g ) -> (( B1r.r & B1r.y & !	B1r.g ) U ( B1r.g )))
+&	(( B1s.r & B1s.y & !  B1s.g ) -> (( B1s.r & B1s.y & !	B1s.g ) U ( B1s.g )))
+&	(( B2s.r & B2s.y & !  B2s.g ) -> (( B2s.r & B2s.y & !	B2s.g ) U ( B2s.g )))
+&	(( B2l.r & B2l.y & !  B2l.g ) -> (( B2l.r & B2l.y & !	B2l.g ) U ( B2l.g )))
+&	(( B3r.r & B3r.y & !  B3r.g ) -> (( B3r.r & B3r.y & !	B3r.g ) U ( B3r.g )))
+&	(( B3l.r & B3l.y & !  B3l.g ) -> (( B3l.r & B3l.y & !	B3l.g ) U ( B3l.g ))))
+
+LTLSPEC -- L7 = pada setiap state harus ada salah lampu hijau yang menyala
+G ( C1.g | C2.g | C3.g | B1r.g | B1s.g | B2s.g | B2l.g | B3r.g | B3l.g )
+
+
+
+ 
